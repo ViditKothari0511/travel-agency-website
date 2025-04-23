@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Agency</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -69,7 +70,7 @@
         .hamburger-line {
             width: 100%;
             height: 3px;
-            background-color: white;
+            background-color: black;
             border-radius: 2px;
         }
 
@@ -251,6 +252,257 @@
                 padding: 2rem;
             }
         }
+
+        /* Logo Animation */
+        .logo-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(300px, 80vw);
+            height: auto;
+            z-index: 10;
+            transition: all 0.1s ease-out;
+        }
+
+        .logo-container.small {
+            width: min(150px, 40vw);
+            top: 20px;
+            left: 20px;
+            transform: none;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Welcome Text */
+        .welcome-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 5;
+            width: 90%;
+            max-width: 800px;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .welcome-text.show {
+            opacity: 1;
+        }
+
+        .welcome-text h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+        }
+
+        .welcome-text p {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            margin-bottom: 2rem;
+        }
+
+        /* Quote Container */
+        .quote-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 5;
+            width: 90%;
+            max-width: 800px;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .quote-container.show {
+            opacity: 1;
+        }
+
+        .quote-container blockquote {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .quote-container cite {
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+        }
+
+        /* Content Section */
+        .content-section {
+            position: relative;
+            padding: 2rem;
+            margin-top: 100vh;
+            background: white;
+            z-index: 1;
+            width: 100%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .content-card {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .content-card h3 {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .content-card p {
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .logo-container {
+                width: min(250px, 70vw);
+            }
+
+            .logo-container.small {
+                width: min(120px, 35vw);
+                top: 15px;
+                left: 15px;
+            }
+
+            .welcome-text {
+                padding: 1rem;
+            }
+
+            .quote-container {
+                padding: 1rem;
+            }
+
+            .content-section {
+                padding: 1rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-container {
+                width: min(200px, 60vw);
+            }
+
+            .logo-container.small {
+                width: min(100px, 30vw);
+                top: 10px;
+                left: 10px;
+            }
+
+            .welcome-text h1 {
+                font-size: clamp(1.5rem, 4vw, 2rem);
+            }
+
+            .welcome-text p {
+                font-size: clamp(0.9rem, 2vw, 1.1rem);
+            }
+
+            .quote-container blockquote {
+                font-size: clamp(1rem, 2.5vw, 1.5rem);
+            }
+        }
+
+        /* Add to the style section */
+        .section-header {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #222;
+        }
+
+        .trips-section .section-header,
+        .testimonials-section .section-header {
+            color: #222;
+        }
+
+        /* Footer */
+        .footer {
+            background: #222;
+            color: white;
+            padding: 4rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .footer-section p {
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #4CAF50;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #ccc;
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                padding: 3rem 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -300,6 +552,7 @@
 
     <!-- Upcoming Trips -->
     <section class="trips-section">
+        <h2 class="section-header">Our Trips</h2>
         <div class="trips-container">
             <div class="trip-card">
                 <div class="trip-image" style="background-image: url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80')"></div>
@@ -328,6 +581,7 @@
 
     <!-- Testimonials -->
     <section class="testimonials-section">
+        <h2 class="section-header">Our Testimonials</h2>
         <div class="testimonials-container">
             <div class="testimonial">
                 <p class="testimonial-content">"An unforgettable experience! The attention to detail and local connections made this trip truly special."</p>
@@ -369,20 +623,28 @@
         function updateLogoPosition() {
             const scrollProgress = Math.min(scrollPosition / 300, 1);
             
-            // Calculate new width (300px to 150px)
-            const newWidth = 300 - (scrollProgress * 150);
+            // Get viewport dimensions
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
             
-            // Calculate new position - from center (50%) to top-left (0)
-            const newTop = 50 - (scrollProgress * 50); // 50% to 0%
-            const newLeft = 50 - (scrollProgress * 50); // 50% to 0%
+            // Calculate center position in pixels
+            const centerX = viewportWidth / 2;
+            const centerY = viewportHeight / 2;
+            
+            // Calculate final position (20px from top and left)
+            const finalX = 20;
+            const finalY = 20;
+            
+            // Interpolate position
+            const newX = centerX - (scrollProgress * (centerX - finalX));
+            const newY = centerY - (scrollProgress * (centerY - finalY));
             
             // Apply styles
-            heroLogo.style.width = `${newWidth}px`;
-            heroLogo.style.top = `${newTop}%`;
-            heroLogo.style.left = `${newLeft}%`;
+            heroLogo.style.top = `${newY}px`;
+            heroLogo.style.left = `${newX}px`;
             
-            // Handle transform
-            if (scrollProgress < 0.1) {
+            // Handle transform - only use it for initial centering
+            if (scrollProgress <= 0) {
                 heroLogo.style.transform = 'translate(-50%, -50%)';
             } else {
                 heroLogo.style.transform = 'none';
@@ -397,6 +659,13 @@
             
             ticking = false;
         }
+
+        // Add resize handler to update positions
+        window.addEventListener('resize', () => {
+            if (!isAnimating) {
+                updateLogoPosition();
+            }
+        });
 
         // Prevent scrolling until animation is complete
         document.body.style.overflow = 'hidden';
@@ -419,7 +688,16 @@
             document.body.style.overflow = 'hidden';
             scrollPosition = 0;
             updateLogoPosition();
+            window.scrollTo(0, 0); // Scroll to top
+        });
+
+        // Also scroll to top when the page is shown (for browser back/forward)
+        window.addEventListener('pageshow', () => {
+            window.scrollTo(0, 0);
         });
     </script>
+
+    <!-- Include footer script -->
+    <script src="include-footer.js"></script>
 </body>
 </html> 
