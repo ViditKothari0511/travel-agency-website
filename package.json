@@ -2,12 +2,6 @@
   "name": "travel-website",
   "version": "1.0.0",
   "description": "A modern travel website",
-  "scripts": {
-    "start": "vercel dev",
-    "build": "echo 'No build step required'"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "vercel": "^33.0.0"
-  }
+  "scripts": {},
+  "dependencies": {}
 } 

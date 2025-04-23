@@ -15,6 +15,7 @@
         body {
             color: #333;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* Hero Section */
@@ -22,6 +23,54 @@
             position: relative;
             height: 100vh;
             background: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80') center/cover;
+            overflow: hidden;
+        }
+
+        .hero-logo {
+            position: fixed;
+            width: 300px;
+            height: auto;
+            transition: all 0.1s ease-out;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hero-logo.scrolled {
+            top: 20px;
+            left: 20px;
+            transform: none;
+            width: 150px;
+        }
+
+        .hamburger-menu {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 30px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        .hamburger-menu.show {
+            opacity: 1;
+        }
+
+        .hamburger-line {
+            width: 100%;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
         }
 
         .hero-content {
@@ -142,6 +191,52 @@
             color: #222;
         }
 
+        /* Navigation Menu */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 2rem;
+            transition: right 0.3s ease;
+            z-index: 1001;
+        }
+
+        .nav-menu.show {
+            right: 0;
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .nav-menu li {
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #4CAF50;
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
         @media (max-width: 768px) {
             .grid-container,
             .trips-container {
@@ -161,6 +256,20 @@
 <body>
     <!-- Hero Section -->
     <section class="hero">
+        <img src="../images/hero_logo.png" alt="Logo" class="hero-logo" id="heroLogo">
+        <div class="hamburger-menu" id="hamburgerMenu">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+        </div>
+        <nav class="nav-menu" id="navMenu">
+            <div class="close-menu" id="closeMenu">×</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
         <div class="hero-content">
             <h1>Discover the World</h1>
             <p>Experience unique journeys that connect you with cultures, landscapes, and people around the globe.</p>
@@ -230,5 +339,87 @@
             </div>
         </div>
     </section>
+
+    <script>
+        const heroLogo = document.getElementById('heroLogo');
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const navMenu = document.getElementById('navMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        let lastScrollY = 0;
+        let ticking = false;
+        let isAnimating = false;
+        let scrollPosition = 0;
+
+        // Toggle navigation menu
+        hamburgerMenu.addEventListener('click', () => {
+            navMenu.classList.add('show');
+        });
+
+        closeMenu.addEventListener('click', () => {
+            navMenu.classList.remove('show');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !hamburgerMenu.contains(e.target)) {
+                navMenu.classList.remove('show');
+            }
+        });
+
+        function updateLogoPosition() {
+            const scrollProgress = Math.min(scrollPosition / 300, 1);
+            
+            // Calculate new width (300px to 150px)
+            const newWidth = 300 - (scrollProgress * 150);
+            
+            // Calculate new position - from center (50%) to top-left (0)
+            const newTop = 50 - (scrollProgress * 50); // 50% to 0%
+            const newLeft = 50 - (scrollProgress * 50); // 50% to 0%
+            
+            // Apply styles
+            heroLogo.style.width = `${newWidth}px`;
+            heroLogo.style.top = `${newTop}%`;
+            heroLogo.style.left = `${newLeft}%`;
+            
+            // Handle transform
+            if (scrollProgress < 0.1) {
+                heroLogo.style.transform = 'translate(-50%, -50%)';
+            } else {
+                heroLogo.style.transform = 'none';
+            }
+
+            // Check if animation is complete
+            if (scrollProgress >= 1 && !isAnimating) {
+                isAnimating = true;
+                document.body.style.overflow = 'auto'; // Enable scrolling
+                hamburgerMenu.classList.add('show'); // Show hamburger menu
+            }
+            
+            ticking = false;
+        }
+
+        // Prevent scrolling until animation is complete
+        document.body.style.overflow = 'hidden';
+
+        window.addEventListener('wheel', (e) => {
+            if (!isAnimating) {
+                e.preventDefault();
+                // Update scroll position based on wheel delta
+                scrollPosition = Math.min(Math.max(0, scrollPosition + e.deltaY), 300);
+                if (!ticking) {
+                    window.requestAnimationFrame(updateLogoPosition);
+                    ticking = true;
+                }
+            }
+        });
+
+        // Reset on page load
+        window.addEventListener('load', () => {
+            isAnimating = false;
+            document.body.style.overflow = 'hidden';
+            scrollPosition = 0;
+            updateLogoPosition();
+        });
+    </script>
 </body>
 </html> 
