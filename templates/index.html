@@ -17,6 +17,8 @@
             color: #333;
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+            touch-action: pan-y; /* Enable vertical touch scrolling */
         }
 
         /* Hero Section */
@@ -25,6 +27,7 @@
             height: 100vh;
             background: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80') center/cover;
             overflow: hidden;
+            -webkit-overflow-scrolling: touch;
         }
 
         .hero-logo {
@@ -250,6 +253,15 @@
 
             .hero-content {
                 padding: 2rem;
+            }
+
+            /* Add mobile-specific touch handling */
+            .hero-logo {
+                touch-action: none; /* Prevent touch events from interfering with logo */
+            }
+
+            .nav-menu {
+                -webkit-overflow-scrolling: touch;
             }
         }
 
@@ -603,6 +615,9 @@
         let ticking = false;
         let isAnimating = false;
         let scrollPosition = 0;
+        let touchStartY = 0;
+        let isTouchDevice = 'ontouchstart' in window;
+        let isInternalNavigation = localStorage.getItem('isInternalNavigation') === 'true';
 
         // Toggle navigation menu
         hamburgerMenu.addEventListener('click', () => {
@@ -660,35 +675,76 @@
             ticking = false;
         }
 
+        function setFinalPosition() {
+            heroLogo.style.top = '20px';
+            heroLogo.style.left = '20px';
+            heroLogo.style.transform = 'none';
+            heroLogo.style.width = '150px';
+            document.body.style.overflow = 'auto';
+            hamburgerMenu.classList.add('show');
+            isAnimating = true;
+        }
+
         // Add resize handler to update positions
         window.addEventListener('resize', () => {
             if (!isAnimating) {
-                updateLogoPosition();
-            }
-        });
-
-        // Prevent scrolling until animation is complete
-        document.body.style.overflow = 'hidden';
-
-        window.addEventListener('wheel', (e) => {
-            if (!isAnimating) {
-                e.preventDefault();
-                // Update scroll position based on wheel delta
-                scrollPosition = Math.min(Math.max(0, scrollPosition + e.deltaY), 300);
-                if (!ticking) {
-                    window.requestAnimationFrame(updateLogoPosition);
-                    ticking = true;
+                if (isInternalNavigation) {
+                    setFinalPosition();
+                } else {
+                    updateLogoPosition();
                 }
             }
         });
 
+        // Handle touch events
+        if (isTouchDevice) {
+            document.addEventListener('touchstart', (e) => {
+                if (!isInternalNavigation) {
+                    touchStartY = e.touches[0].clientY;
+                }
+            });
+
+            document.addEventListener('touchmove', (e) => {
+                if (!isInternalNavigation && !isAnimating) {
+                    e.preventDefault();
+                    const touchY = e.touches[0].clientY;
+                    const deltaY = touchStartY - touchY;
+                    scrollPosition = Math.min(Math.max(0, scrollPosition + deltaY), 300);
+                    touchStartY = touchY;
+                    
+                    if (!ticking) {
+                        window.requestAnimationFrame(updateLogoPosition);
+                        ticking = true;
+                    }
+                }
+            }, { passive: false });
+        } else {
+            // Handle mouse wheel for non-touch devices
+            window.addEventListener('wheel', (e) => {
+                if (!isInternalNavigation && !isAnimating) {
+                    e.preventDefault();
+                    scrollPosition = Math.min(Math.max(0, scrollPosition + e.deltaY), 300);
+                    if (!ticking) {
+                        window.requestAnimationFrame(updateLogoPosition);
+                        ticking = true;
+                    }
+                }
+            });
+        }
+
         // Reset on page load
         window.addEventListener('load', () => {
-            isAnimating = false;
-            document.body.style.overflow = 'hidden';
-            scrollPosition = 0;
-            updateLogoPosition();
-            window.scrollTo(0, 0); // Scroll to top
+            if (isInternalNavigation) {
+                setFinalPosition();
+            } else {
+                isAnimating = false;
+                document.body.style.overflow = 'hidden';
+                scrollPosition = 0;
+                updateLogoPosition();
+            }
+            window.scrollTo(0, 0);
+            // Reset the internal navigation flag
+            localStorage.setItem('isInternalNavigation', 'false');
         });
 
         // Also scroll to top when the page is shown (for browser back/forward)
