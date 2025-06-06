@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Details - Travel Agency</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="footer.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .header-logo {
+            width: 150px;
+            height: auto;
+        }
+
+        /* Navigation */
+        .hamburger-menu {
+            width: 30px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .hamburger-line {
+            width: 100%;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 2rem;
+            transition: right 0.3s ease;
+            z-index: 1001;
+        }
+
+        .nav-menu.show {
+            right: 0;
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .nav-menu li {
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #4CAF50;
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Trip Details Content */
+        .trip-hero {
+            height: 50vh;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            margin-top: 60px;
+        }
+
+        .trip-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+        }
+
+        .trip-hero-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            color: white;
+            z-index: 1;
+        }
+
+        .trip-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .trip-details {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .trip-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .trip-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .trip-card h3 {
+            color: #222;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .trip-card p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .price {
+            color: #4CAF50;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .inclusions-exclusions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .inclusions, .exclusions {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .inclusions h2, .exclusions h2 {
+            color: #222;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .inclusions ul, .exclusions ul {
+            list-style: none;
+        }
+
+        .inclusions li, .exclusions li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .inclusions li::before {
+            content: '✓';
+            color: #4CAF50;
+            position: absolute;
+            left: 0;
+        }
+
+        .exclusions li::before {
+            content: '✗';
+            color: #f44336;
+            position: absolute;
+            left: 0;
+        }
+
+        .itinerary {
+            margin-bottom: 4rem;
+        }
+
+        .itinerary h2 {
+            color: #222;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .day-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .day-header {
+            padding: 1.5rem;
+            background: #f8f8f8;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .day-header h3 {
+            color: #222;
+            font-size: 1.3rem;
+        }
+
+        .day-content {
+            padding: 1.5rem;
+            display: none;
+        }
+
+        .day-content.show {
+            display: block;
+        }
+
+        .day-content p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: 768px) {
+            .inclusions-exclusions {
+                grid-template-columns: 1fr;
+            }
+
+            .trip-hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" onclick="localStorage.setItem('isInternalNavigation', 'true')">
+            <img src="../images/hero_logo.png" alt="Logo" class="header-logo">
+        </a>
+        <div class="hamburger-menu" id="hamburgerMenu">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+        </div>
+        <nav class="nav-menu" id="navMenu">
+            <div class="close-menu" id="closeMenu">×</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Trip Hero Section -->
+    <section class="trip-hero" style="background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80')">
+        <div class="trip-hero-content">
+            <h1 id="tripName">Amazing Adventure Tour</h1>
+        </div>
+    </section>
+
+    <!-- Trip Details -->
+    <section class="trip-details">
+        <div class="trip-overview">
+            <div class="trip-card">
+                <h3>Duration</h3>
+                <p id="tripDuration">7 Days / 6 Nights</p>
+            </div>
+            <div class="trip-card">
+                <h3>Price</h3>
+                <p class="price" id="tripPrice">$1,999</p>
+            </div>
+        </div>
+
+        <div class="inclusions-exclusions">
+            <div class="inclusions">
+                <h2>Inclusions</h2>
+                <ul id="inclusionsList">
+                    <li>Accommodation in 4-star hotels</li>
+                    <li>All meals as specified in the itinerary</li>
+                    <li>Professional English-speaking guide</li>
+                    <li>All entrance fees to attractions</li>
+                    <li>Transportation in air-conditioned vehicles</li>
+                </ul>
+            </div>
+            <div class="exclusions">
+                <h2>Exclusions</h2>
+                <ul id="exclusionsList">
+                    <li>International flights</li>
+                    <li>Travel insurance</li>
+                    <li>Personal expenses</li>
+                    <li>Tips and gratuities</li>
+                    <li>Visa fees</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="itinerary">
+            <h2>Detailed Itinerary</h2>
+            <div id="itineraryDays">
+                <!-- Day 1 -->
+                <div class="day-card">
+                    <div class="day-header" onclick="toggleDay(1)">
+                        <h3>Day 1: Arrival and Welcome</h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="day-content">
+                        <p>Welcome to your adventure! Upon arrival at the airport, you'll be transferred to your hotel. After check-in, you'll have some free time to relax and explore the local area. In the evening, enjoy a welcome dinner with your fellow travelers.</p>
+                    </div>
+                </div>
+
+                <!-- Day 2 -->
+                <div class="day-card">
+                    <div class="day-header" onclick="toggleDay(2)">
+                        <h3>Day 2: City Exploration</h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="day-content">
+                        <p>Start your day with a guided city tour, visiting the main landmarks and historical sites. Learn about the local culture and history as you explore the city's hidden gems. In the afternoon, enjoy some free time for shopping or additional exploration.</p>
+                    </div>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="day-card">
+                    <div class="day-header" onclick="toggleDay(3)">
+                        <h3>Day 3: Nature Adventure</h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="day-content">
+                        <p>Today's adventure takes you into the heart of nature. Enjoy a scenic hike through beautiful landscapes, with opportunities for wildlife spotting and photography. A picnic lunch will be provided during the hike.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Your trusted partner in creating unforgettable travel experiences. We specialize in crafting unique journeys that connect you with cultures, landscapes, and people around the globe.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Travel Street, City, Country</p>
+                <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                <p><i class="fas fa-envelope"></i> info@travelagency.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <a href="payment-procedure.html">Payment Procedure</a>
+            <span>|</span>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <span>|</span>
+            <a href="terms-and-conditions.html">Terms and Conditions</a>
+            <span>|</span>
+            <a href="terms-of-use.html">Terms of Use</a>
+            <p>&copy; 2024 Travel Agency. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const navMenu = document.getElementById('navMenu');
+        const closeMenu = document.getElementById('closeMenu');
+
+        // Toggle navigation menu
+        hamburgerMenu.addEventListener('click', () => {
+            navMenu.classList.add('show');
+        });
+
+        closeMenu.addEventListener('click', () => {
+            navMenu.classList.remove('show');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !hamburgerMenu.contains(e.target)) {
+                navMenu.classList.remove('show');
+            }
+        });
+
+        // Function to toggle day content
+        function toggleDay(dayNumber) {
+            const dayContent = document.querySelector(`.day-card:nth-child(${dayNumber}) .day-content`);
+            const toggleIcon = document.querySelector(`.day-card:nth-child(${dayNumber}) .toggle-icon`);
+            
+            dayContent.classList.toggle('show');
+            toggleIcon.classList.toggle('rotated');
+        }
+
+        // Function to load trip data (to be replaced with database data)
+        function loadTripData(tripId) {
+            // This will be replaced with actual database data
+            const tripData = {
+                name: "Amazing Adventure Tour",
+                duration: "7 Days / 6 Nights",
+                price: "$1,999",
+                inclusions: [
+                    "Accommodation in 4-star hotels",
+                    "All meals as specified in the itinerary",
+                    "Professional English-speaking guide",
+                    "All entrance fees to attractions",
+                    "Transportation in air-conditioned vehicles"
+                ],
+                exclusions: [
+                    "International flights",
+                    "Travel insurance",
+                    "Personal expenses",
+                    "Tips and gratuities",
+                    "Visa fees"
+                ],
+                itinerary: [
+                    {
+                        day: 1,
+                        title: "Arrival and Welcome",
+                        description: "Welcome to your adventure! Upon arrival at the airport, you'll be transferred to your hotel. After check-in, you'll have some free time to relax and explore the local area. In the evening, enjoy a welcome dinner with your fellow travelers."
+                    },
+                    {
+                        day: 2,
+                        title: "City Exploration",
+                        description: "Start your day with a guided city tour, visiting the main landmarks and historical sites. Learn about the local culture and history as you explore the city's hidden gems. In the afternoon, enjoy some free time for shopping or additional exploration."
+                    },
+                    {
+                        day: 3,
+                        title: "Nature Adventure",
+                        description: "Today's adventure takes you into the heart of nature. Enjoy a scenic hike through beautiful landscapes, with opportunities for wildlife spotting and photography. A picnic lunch will be provided during the hike."
+                    }
+                ]
+            };
+
+            // Update the page with trip data
+            document.getElementById('tripName').textContent = tripData.name;
+            document.getElementById('tripDuration').textContent = tripData.duration;
+            document.getElementById('tripPrice').textContent = tripData.price;
+
+            // Update inclusions and exclusions
+            const inclusionsList = document.getElementById('inclusionsList');
+            const exclusionsList = document.getElementById('exclusionsList');
+            
+            inclusionsList.innerHTML = tripData.inclusions.map(item => `<li>${item}</li>`).join('');
+            exclusionsList.innerHTML = tripData.exclusions.map(item => `<li>${item}</li>`).join('');
+
+            // Update itinerary
+            const itineraryDays = document.getElementById('itineraryDays');
+            itineraryDays.innerHTML = tripData.itinerary.map(day => `
+                <div class="day-card">
+                    <div class="day-header" onclick="toggleDay(${day.day})">
+                        <h3>Day ${day.day}: ${day.title}</h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="day-content">
+                        <p>${day.description}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Load trip data when the page loads
+        window.addEventListener('load', () => {
+            // Get trip ID from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const tripId = urlParams.get('id');
+            loadTripData(tripId);
+        });
+    </script>
+
+    <script src="js/main.js"></script>
+</body>
+</html> 

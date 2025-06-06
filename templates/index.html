@@ -36,9 +36,6 @@
             height: auto;
             transition: all 0.1s ease-out;
             z-index: 1000;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 5px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -142,12 +139,26 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .trip-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
         }
 
         .trip-image {
             height: 250px;
             background-size: cover;
             background-position: center;
+            transition: transform 0.3s ease;
+        }
+
+        .trip-card:hover .trip-image {
+            transform: scale(1.05);
         }
 
         .trip-content {
@@ -157,6 +168,11 @@
         .trip-content h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
+            color: #222;
+        }
+
+        .trip-content p {
+            color: #666;
         }
 
         .trip-details {
@@ -465,6 +481,7 @@
             background: #222;
             color: white;
             padding: 4rem 2rem;
+            margin-top: auto;
         }
 
         .footer-content {
@@ -484,6 +501,29 @@
         .footer-section p {
             color: #ccc;
             margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .footer-section ul li a:hover {
+            color: #4CAF50;
         }
 
         .social-links {
@@ -510,6 +550,26 @@
             color: #ccc;
         }
 
+        .footer-bottom a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            margin: 0 1rem;
+        }
+
+        .footer-bottom a:hover {
+            color: #4CAF50;
+        }
+
+        .footer-bottom span {
+            color: #666;
+        }
+
+        .footer-bottom p {
+            margin-top: 1rem;
+        }
+
         @media (max-width: 768px) {
             .footer {
                 padding: 3rem 1rem;
@@ -520,7 +580,9 @@
 <body>
     <!-- Hero Section -->
     <section class="hero">
-        <img src="../images/hero_logo.png" alt="Logo" class="hero-logo" id="heroLogo">
+        <a href="index.html" onclick="localStorage.setItem('isInternalNavigation', 'true')">
+            <img src="../images/hero_logo.png" alt="Logo" class="hero-logo" id="heroLogo">
+        </a>
         <div class="hamburger-menu" id="hamburgerMenu">
             <div class="hamburger-line"></div>
             <div class="hamburger-line"></div>
@@ -566,7 +628,7 @@
     <section class="trips-section">
         <h2 class="section-header">Our Trips</h2>
         <div class="trips-container">
-            <div class="trip-card">
+            <a href="trip-details.html?id=1" class="trip-card">
                 <div class="trip-image" style="background-image: url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80')"></div>
                 <div class="trip-content">
                     <h3>Himalayan Trek</h3>
@@ -576,8 +638,8 @@
                         <span>Group Size: 8-12</span>
                     </div>
                 </div>
-            </div>
-            <div class="trip-card">
+            </a>
+            <a href="trip-details.html?id=2" class="trip-card">
                 <div class="trip-image" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80')"></div>
                 <div class="trip-content">
                     <h3>Beach Paradise</h3>
@@ -587,7 +649,7 @@
                         <span>Group Size: 6-10</span>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
     </section>
 
@@ -605,6 +667,46 @@
             </div>
         </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Your trusted partner in creating unforgettable travel experiences. We specialize in crafting unique journeys that connect you with cultures, landscapes, and people around the globe.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Travel Street, City, Country</p>
+                <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                <p><i class="fas fa-envelope"></i> info@travelagency.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <a href="payment-procedure.html">Payment Procedure</a>
+            <span>|</span>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <span>|</span>
+            <a href="terms-and-conditions.html">Terms and Conditions</a>
+            <span>|</span>
+            <a href="terms-of-use.html">Terms of Use</a>
+            <p>&copy; 2024 Travel Agency. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
         const heroLogo = document.getElementById('heroLogo');
@@ -638,32 +740,31 @@
         function updateLogoPosition() {
             const scrollProgress = Math.min(scrollPosition / 300, 1);
             
-            // Get viewport dimensions
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
+            // Get the current position of the logo's top-left corner
+            const logoRect = heroLogo.getBoundingClientRect();
+            console.log('Logo top-left corner coordinates:', {
+                x: logoRect.left,
+                y: logoRect.top
+            });
             
-            // Calculate center position in pixels
-            const centerX = viewportWidth / 2;
-            const centerY = viewportHeight / 2;
+            // Start from the current top-left position
+            const initialX = logoRect.left;
+            const initialY = logoRect.top;
             
-            // Calculate final position (20px from top and left)
-            const finalX = 20;
-            const finalY = 20;
+            // Final position is top-left corner (0,0)
+            const finalX = 0;
+            const finalY = 0;
             
-            // Interpolate position
-            const newX = centerX - (scrollProgress * (centerX - finalX));
-            const newY = centerY - (scrollProgress * (centerY - finalY));
+            // Interpolate position along the straight line
+            const newX = initialX - (scrollProgress * initialX);
+            const newY = initialY - (scrollProgress * initialY);
             
             // Apply styles
             heroLogo.style.top = `${newY}px`;
             heroLogo.style.left = `${newX}px`;
             
-            // Handle transform - only use it for initial centering
-            if (scrollProgress <= 0) {
-                heroLogo.style.transform = 'translate(-50%, -50%)';
-            } else {
-                heroLogo.style.transform = 'none';
-            }
+            // Remove transform since we're working with top-left corner
+            heroLogo.style.transform = 'none';
 
             // Check if animation is complete
             if (scrollProgress >= 1 && !isAnimating) {
@@ -676,8 +777,8 @@
         }
 
         function setFinalPosition() {
-            heroLogo.style.top = '20px';
-            heroLogo.style.left = '20px';
+            heroLogo.style.top = '0px';
+            heroLogo.style.left = '0px';
             heroLogo.style.transform = 'none';
             heroLogo.style.width = '150px';
             document.body.style.overflow = 'auto';
@@ -734,15 +835,26 @@
 
         // Reset on page load
         window.addEventListener('load', () => {
+            // Reset scroll position first
+            window.scrollTo(0, 0);
+            document.body.style.overflow = 'hidden';
+            
             if (isInternalNavigation) {
                 setFinalPosition();
             } else {
+                // Reset animation state
                 isAnimating = false;
-                document.body.style.overflow = 'hidden';
                 scrollPosition = 0;
+                lastScrollY = 0;
+                ticking = false;
+                
+                // Hide hamburger menu
+                hamburgerMenu.classList.remove('show');
+                
+                // Force a position update
                 updateLogoPosition();
             }
-            window.scrollTo(0, 0);
+            
             // Reset the internal navigation flag
             localStorage.setItem('isInternalNavigation', 'false');
         });
@@ -750,10 +862,8 @@
         // Also scroll to top when the page is shown (for browser back/forward)
         window.addEventListener('pageshow', () => {
             window.scrollTo(0, 0);
+            document.body.style.overflow = 'hidden';
         });
     </script>
-
-    <!-- Include footer script -->
-    <script src="include-footer.js"></script>
 </body>
 </html> 

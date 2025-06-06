@@ -1,13 +1,3 @@
-// Function to include footer
-function includeFooter() {
-    fetch('footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.querySelector('body').insertAdjacentHTML('beforeend', data);
-        })
-        .catch(error => console.error('Error loading footer:', error));
-}
-
 // Call the function when the page loads
 document.addEventListener('DOMContentLoaded', function() {
     // Create footer element
@@ -17,11 +7,12 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="footer-content">
             <div class="footer-section">
                 <h3>About Us</h3>
-                <p>We are passionate about creating unforgettable travel experiences that connect you with the world.</p>
+                <p>Your trusted partner in creating unforgettable travel experiences. We specialize in crafting unique journeys that connect you with cultures, landscapes, and people around the globe.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-facebook"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
             <div class="footer-section">
@@ -34,12 +25,19 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             <div class="footer-section">
                 <h3>Contact Info</h3>
-                <p>Email: info@travelagency.com</p>
-                <p>Phone: +1 (555) 123-4567</p>
-                <p>Address: 123 Travel Street, Adventure City</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Travel Street, City, Country</p>
+                <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                <p><i class="fas fa-envelope"></i> info@travelagency.com</p>
             </div>
         </div>
         <div class="footer-bottom">
+            <a href="payment-procedure.html">Payment Procedure</a>
+            <span>|</span>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <span>|</span>
+            <a href="terms-and-conditions.html">Terms and Conditions</a>
+            <span>|</span>
+            <a href="terms-of-use.html">Terms of Use</a>
             <p>&copy; 2024 Travel Agency. All rights reserved.</p>
         </div>
     `;

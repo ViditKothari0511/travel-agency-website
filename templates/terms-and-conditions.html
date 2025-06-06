@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Travel Agency</title>
+    <title>Terms and Conditions - Travel Agency</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="footer.css">
     <style>
@@ -100,63 +100,41 @@
             cursor: pointer;
         }
 
-        /* About Content */
-        .about-section {
+        /* Content */
+        .content-section {
             padding: 8rem 2rem 4rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .about-section h1 {
+        .content-section h1 {
             font-size: 2.5rem;
             margin-bottom: 2rem;
             color: #222;
         }
 
-        .about-section p {
+        .content-section h2 {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            color: #222;
+        }
+
+        .content-section p {
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
         }
 
-        .team-section {
-            padding: 4rem 2rem;
-            background: #f8f8f8;
+        .content-section ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
         }
 
-        .team-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .team-member {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .team-member img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-        }
-
-        .team-member h3 {
+        .content-section li {
             margin-bottom: 0.5rem;
-            color: #222;
-        }
-
-        .team-member p {
-            color: #666;
         }
 
         @media (max-width: 768px) {
-            .about-section {
+            .content-section {
                 padding: 6rem 1rem 2rem;
             }
         }
@@ -183,33 +161,69 @@
         </nav>
     </header>
 
-    <!-- About Content -->
-    <section class="about-section">
-        <h1>About Us</h1>
-        <p>Welcome to our travel agency, where we believe that travel is not just about visiting new places, but about creating meaningful connections and unforgettable experiences.</p>
-        <p>Founded in 2010, we have been helping travelers discover the world's most beautiful destinations while ensuring responsible and sustainable tourism practices.</p>
-        <p>Our team of experienced travel experts is dedicated to crafting unique journeys that go beyond the typical tourist experience, connecting you with local cultures and communities.</p>
-    </section>
+    <!-- Content -->
+    <section class="content-section">
+        <h1>Terms and Conditions</h1>
+        
+        <h2>Booking and Reservations</h2>
+        <p>All bookings are subject to availability and confirmation. We reserve the right to decline any booking at our discretion.</p>
+        <ul>
+            <li>Bookings must be made by individuals 18 years or older</li>
+            <li>All travelers must have valid travel documents</li>
+            <li>Prices are subject to change until full payment is received</li>
+        </ul>
 
-    <!-- Team Section -->
-    <section class="team-section">
-        <div class="team-container">
-            <div class="team-member">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Team Member">
-                <h3>John Smith</h3>
-                <p>Founder & CEO</p>
-            </div>
-            <div class="team-member">
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Team Member">
-                <h3>Sarah Johnson</h3>
-                <p>Travel Expert</p>
-            </div>
-            <div class="team-member">
-                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Team Member">
-                <h3>Michael Chen</h3>
-                <p>Adventure Specialist</p>
-            </div>
-        </div>
+        <h2>Payment Terms</h2>
+        <p>Payment terms vary depending on the type of booking and time until departure:</p>
+        <ul>
+            <li>Deposit required at time of booking</li>
+            <li>Full payment required 60 days before departure</li>
+            <li>Late payments may result in cancellation of booking</li>
+        </ul>
+
+        <h2>Cancellation Policy</h2>
+        <p>Cancellation fees apply as follows:</p>
+        <ul>
+            <li>60+ days before departure: Deposit only</li>
+            <li>30-59 days before departure: 50% of total cost</li>
+            <li>Less than 30 days before departure: 100% of total cost</li>
+        </ul>
+
+        <h2>Travel Insurance</h2>
+        <p>We strongly recommend that all travelers obtain comprehensive travel insurance. The insurance should cover:</p>
+        <ul>
+            <li>Medical expenses</li>
+            <li>Trip cancellation</li>
+            <li>Lost or delayed baggage</li>
+            <li>Personal liability</li>
+        </ul>
+
+        <h2>Changes to Bookings</h2>
+        <p>Changes to bookings are subject to availability and may incur additional charges:</p>
+        <ul>
+            <li>Name changes may be subject to airline fees</li>
+            <li>Date changes may result in price differences</li>
+            <li>Changes must be requested in writing</li>
+        </ul>
+
+        <h2>Travel Documents</h2>
+        <p>It is the traveler's responsibility to ensure they have all necessary travel documents:</p>
+        <ul>
+            <li>Valid passport with at least 6 months validity</li>
+            <li>Required visas</li>
+            <li>Vaccination certificates if required</li>
+        </ul>
+
+        <h2>Liability</h2>
+        <p>We act as an agent for various travel service providers. We are not liable for:</p>
+        <ul>
+            <li>Acts or omissions of third-party providers</li>
+            <li>Force majeure events</li>
+            <li>Personal injury or property damage</li>
+        </ul>
+
+        <h2>Complaints</h2>
+        <p>Any complaints should be reported immediately to our local representative or to our office. We will make every effort to resolve the issue promptly.</p>
     </section>
 
     <!-- Footer -->

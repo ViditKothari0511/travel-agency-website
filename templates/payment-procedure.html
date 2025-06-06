@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Travel Agency</title>
+    <title>Payment Procedure - Travel Agency</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="footer.css">
     <style>
@@ -100,63 +100,41 @@
             cursor: pointer;
         }
 
-        /* About Content */
-        .about-section {
+        /* Content */
+        .content-section {
             padding: 8rem 2rem 4rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .about-section h1 {
+        .content-section h1 {
             font-size: 2.5rem;
             margin-bottom: 2rem;
             color: #222;
         }
 
-        .about-section p {
+        .content-section h2 {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            color: #222;
+        }
+
+        .content-section p {
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
         }
 
-        .team-section {
-            padding: 4rem 2rem;
-            background: #f8f8f8;
+        .content-section ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
         }
 
-        .team-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .team-member {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .team-member img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-        }
-
-        .team-member h3 {
+        .content-section li {
             margin-bottom: 0.5rem;
-            color: #222;
-        }
-
-        .team-member p {
-            color: #666;
         }
 
         @media (max-width: 768px) {
-            .about-section {
+            .content-section {
                 padding: 6rem 1rem 2rem;
             }
         }
@@ -183,33 +161,41 @@
         </nav>
     </header>
 
-    <!-- About Content -->
-    <section class="about-section">
-        <h1>About Us</h1>
-        <p>Welcome to our travel agency, where we believe that travel is not just about visiting new places, but about creating meaningful connections and unforgettable experiences.</p>
-        <p>Founded in 2010, we have been helping travelers discover the world's most beautiful destinations while ensuring responsible and sustainable tourism practices.</p>
-        <p>Our team of experienced travel experts is dedicated to crafting unique journeys that go beyond the typical tourist experience, connecting you with local cultures and communities.</p>
-    </section>
+    <!-- Content -->
+    <section class="content-section">
+        <h1>Payment Procedure</h1>
+        
+        <h2>Booking and Payment Process</h2>
+        <p>To secure your booking, we require a deposit payment. The remaining balance is due 60 days before your departure date. For bookings made within 60 days of departure, full payment is required at the time of booking.</p>
 
-    <!-- Team Section -->
-    <section class="team-section">
-        <div class="team-container">
-            <div class="team-member">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Team Member">
-                <h3>John Smith</h3>
-                <p>Founder & CEO</p>
-            </div>
-            <div class="team-member">
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Team Member">
-                <h3>Sarah Johnson</h3>
-                <p>Travel Expert</p>
-            </div>
-            <div class="team-member">
-                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Team Member">
-                <h3>Michael Chen</h3>
-                <p>Adventure Specialist</p>
-            </div>
-        </div>
+        <h2>Accepted Payment Methods</h2>
+        <ul>
+            <li>Credit Cards (Visa, MasterCard, American Express)</li>
+            <li>Debit Cards</li>
+            <li>Bank Transfers</li>
+            <li>Online Payment Gateways</li>
+        </ul>
+
+        <h2>Payment Schedule</h2>
+        <ul>
+            <li>Initial Deposit: 20% of total cost</li>
+            <li>Second Payment: 30% of total cost (90 days before departure)</li>
+            <li>Final Payment: Remaining balance (60 days before departure)</li>
+        </ul>
+
+        <h2>Payment Security</h2>
+        <p>All payments are processed through secure, encrypted channels. We do not store your credit card information on our servers.</p>
+
+        <h2>Cancellation and Refund Policy</h2>
+        <p>If you need to cancel your booking, the following refund policy applies:</p>
+        <ul>
+            <li>More than 60 days before departure: Full refund minus deposit</li>
+            <li>30-60 days before departure: 50% refund</li>
+            <li>Less than 30 days before departure: No refund</li>
+        </ul>
+
+        <h2>Payment Confirmation</h2>
+        <p>You will receive a payment confirmation email immediately after each successful transaction. Please keep this confirmation for your records.</p>
     </section>
 
     <!-- Footer -->

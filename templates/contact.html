@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Travel Agency</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="footer.css">
     <style>
         * {
@@ -197,7 +197,9 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <img src="../images/hero_logo.png" alt="Logo" class="header-logo">
+        <a href="index.html" onclick="localStorage.setItem('isInternalNavigation', 'true')">
+            <img src="../images/hero_logo.png" alt="Logo" class="header-logo">
+        </a>
         <div class="hamburger-menu" id="hamburgerMenu">
             <div class="hamburger-line"></div>
             <div class="hamburger-line"></div>
@@ -263,6 +265,46 @@
         </div>
     </section>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Your trusted partner in creating unforgettable travel experiences. We specialize in crafting unique journeys that connect you with cultures, landscapes, and people around the globe.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Travel Street, City, Country</p>
+                <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                <p><i class="fas fa-envelope"></i> info@travelagency.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <a href="payment-procedure.html">Payment Procedure</a>
+            <span>|</span>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <span>|</span>
+            <a href="terms-and-conditions.html">Terms and Conditions</a>
+            <span>|</span>
+            <a href="terms-of-use.html">Terms of Use</a>
+            <p>&copy; 2024 Travel Agency. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script>
         const hamburgerMenu = document.getElementById('hamburgerMenu');
         const navMenu = document.getElementById('navMenu');
@@ -294,7 +336,6 @@
         });
     </script>
 
-    <!-- Include footer script -->
-    <script src="include-footer.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html> 
